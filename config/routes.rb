@@ -7,6 +7,7 @@ Spree::Core::Engine.routes.draw do
       end
 
       collection do
+        get :business_details
         post :update_positions
       end
     end

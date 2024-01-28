@@ -1,0 +1,132 @@
+<%= render partial: 'spree/admin/shared/error_messages', locals: { target: @vendor } %>
+<%= hidden_field_tag :create_user, true  %>
+<div class="form-group">
+  <%= f.field_container :company_identification_number do %>
+    <%= f.label :company_identification_number %>
+    <%= f.text_field :company_identification_number, class: 'form-control' %><br>
+    <%= f.file_field :company_identification_document %>
+    <% if @vendor.company_identification_document_attachment.present? %>
+      <br><br>
+      <a href="#company_identification_document_<%= @vendor.id %>" role='button' data-toggle='modal'>View Company Identification Document</a>
+    <% end %>
+  <% end %>
+    <%= f.field_container :vendor_legal_business_name do %>
+    <%= f.label :vendor_legal_business_name %>
+    <%= f.text_field :vendor_legal_business_name, class: 'form-control' %>
+  <% end %>
+  <%= f.field_container :address do %>
+    <%= f.label :address %>
+    <%= f.text_area :address, class: 'form-control' %>
+  <% end %>
+  <%= f.field_container :account_number do %>
+    <%= f.label :account_number %>
+    <%= f.text_field :account_number, class: 'form-control' %>
+  <% end %>
+  <%= f.field_container :ifsc_code do %>
+    <%= f.label :ifsc_code %>
+    <%= f.text_field :ifsc_code, class: 'form-control' %>
+  <% end %>
+  <%= f.field_container :account_holder_name do %>
+    <%= f.label :account_holder_name %>
+    <%= f.text_field :account_holder_name, class: 'form-control' %><br>
+    <%= f.file_field :bank_account_document %>
+    <% if @vendor.bank_account_document_attachment.present? %>
+      <br><br>
+      <a href="#bank_account_document_<%= @vendor.id %>" role='button' data-toggle='modal'>View Bank Account Document</a>
+    <% end %>
+  <% end %>
+  <%= f.field_container :national_identification_number do %>
+    <%= f.label :national_identification_number %>
+    <%= f.text_field :national_identification_number, class: 'form-control' %><br>
+    <%= f.file_field :national_identification_document %>
+    <% if @vendor.national_identification_document_attachment.present? %>
+      <br><br>
+      <a href="#national_identification_document_<%= @vendor.id %>" role='button' data-toggle='modal'>View National Identification Document</a>
+    <% end %>
+  <% end %>
+    <%= f.field_container :personal_identification_number do %>
+    <%= f.label :personal_identification_number %>
+    <%= f.text_field :personal_identification_number, class: 'form-control' %><br>
+    <%= f.file_field :personal_identification_document %>
+    <% if @vendor.personal_identification_document_attachment.present? %>
+      <br><br>
+      <a href="#personal_identification_document_<%= @vendor.id %>" role='button' data-toggle='modal'>View Personal Identification Document</a>
+    <% end %>
+  <% end %>
+</div>
+
+<!-- modal start -->
+<div id="company_identification_document_<%= @vendor.id %>" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"> 
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="card-title">Company Identification Document Preview</h5>
+      </div>
+      <div class="modal-body">
+        <% if @vendor.company_identification_document_attachment.present? %>
+          <iframe src="<%= Rails.application.routes.url_helpers.rails_blob_path(@vendor.company_identification_document_attachment.blob, only_path: true) %>" width="100%" height="800px"></iframe>
+        <% else %>
+          <h2>Vendor hasn't uploaded a Company Identification Document</h2>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- modal end -->
+
+<!-- modal start -->
+<div id="bank_account_document_<%= @vendor.id %>" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"> 
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="card-title">Bank Account Document Preview</h5>
+      </div>
+      <div class="modal-body">
+        <% if @vendor.bank_account_document_attachment.present? %>
+          <iframe src="<%= Rails.application.routes.url_helpers.rails_blob_path(@vendor.bank_account_document_attachment.blob, only_path: true) %>" width="100%" height="800px"></iframe>
+        <% else %>
+          <h2>Vendor hasn't uploaded a Bank Account Document</h2>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- modal end -->
+
+<!-- modal start -->
+<div id="national_identification_document_<%= @vendor.id %>" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"> 
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="card-title">National Identification Document Preview</h5>
+      </div>
+      <div class="modal-body">
+        <% if @vendor.national_identification_document_attachment.present? %>
+          <iframe src="<%= Rails.application.routes.url_helpers.rails_blob_path(@vendor.national_identification_document_attachment.blob, only_path: true) %>" width="100%" height="800px"></iframe>
+        <% else %>
+          <h2>Vendor hasn't uploaded a National Identification Document Document</h2>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- modal end -->
+
+<!-- modal start -->
+<div id="personal_identification_document_<%= @vendor.id %>" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"> 
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="card-title">Personal Identification Document Preview</h5>
+      </div>
+      <div class="modal-body">
+        <% if @vendor.personal_identification_document_attachment.present? %>
+          <iframe src="<%= Rails.application.routes.url_helpers.rails_blob_path(@vendor.personal_identification_document_attachment.blob, only_path: true) %>" width="100%" height="800px"></iframe>
+        <% else %>
+          <h2>Vendor hasn't uploaded a Personal Identification Document Document</h2>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- modal end -->

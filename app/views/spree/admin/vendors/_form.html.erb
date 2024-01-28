@@ -13,10 +13,11 @@
     <%= f.text_area :contact_us, class: 'form-control' %>
   <% end %>
   <%= f.field_container :state do %>
+    <% disabled = try_spree_current_user.spree_roles.pluck(:name).include?('admin') %>
     <%= f.label :state, Spree.t(:state) %>
     <%= f.select :state,
       options_for_select(vendor_state_options, selected: @vendor.state),
-      {}, class: 'select2', required: :required %>
+      {}, class: 'select2', required: :required, disabled: !disabled %>
   <% end %>
   <%= f.field_container :image do %>
     <%= f.label :image %>
