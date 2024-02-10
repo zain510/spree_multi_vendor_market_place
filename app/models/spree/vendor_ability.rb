@@ -23,6 +23,7 @@ class Spree::VendorAbility
       apply_stock_movement_permissions
       apply_variant_permissions
       apply_vendor_permissions
+      apply_quotation_permissions
       apply_vendor_settings_permissions
       apply_state_changes_permissions
     end
@@ -48,7 +49,7 @@ class Spree::VendorAbility
                   end
 
     if order_scope.present?
-      can %i[admin show index edit update cart], Spree::Order, order_scope.merge(state: 'complete')
+      can %i[admin show index edit update cart approve resend set_channel reset_digitals open_adjustments close_adjustments], Spree::Order, order_scope.merge(state: 'complete')
     else
       cannot_display_model(Spree::Order)
     end
@@ -137,6 +138,10 @@ class Spree::VendorAbility
   def apply_vendor_permissions
     can :manage, Spree::Vendor, id: @vendor_ids
     cannot :create, Spree::Vendor
+  end
+
+  def apply_quotation_permissions
+    can [:manage, :modify], Spree::VariantQuotationRequest
   end
 
   def apply_vendor_settings_permissions
